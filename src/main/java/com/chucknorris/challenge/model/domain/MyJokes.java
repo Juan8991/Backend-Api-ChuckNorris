@@ -22,7 +22,8 @@ public class MyJokes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_joke")
     private Long idJoke;
-    private String icon_url;
+    @Column(name = "icon_url")
+    private String iconUrl;
     private String id;
     private String url;
     private String value;

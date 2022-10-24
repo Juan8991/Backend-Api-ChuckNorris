@@ -33,16 +33,16 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Integer checkUserAndPassword(String email, String Password) throws RuntimeException {
+    public Long checkUserAndPassword(String email, String Password) throws RuntimeException {
         Optional<User> userToCheck = userRepository.findByEmail(email);
         if(userToCheck.isPresent()){
             if(encoder.matches(Password,userToCheck.get().getPassword())){
-                return 200;
+                return userToCheck.get().getUserId();
             }else{
-                return 555;
+                return 555L;
             }
         }
-        return 404;
+        return 404L;
     }
 
 }

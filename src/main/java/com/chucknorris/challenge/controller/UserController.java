@@ -37,16 +37,23 @@ public class UserController {
             return new ResponseEntity<>(user.get(), HttpStatus.OK);
         };
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
+    }
+    @GetMapping(path = "/id/{id}")
+    public ResponseEntity<User> getById(@PathVariable(name = "id")Long id){
+        var user=userService.getUserById(id);
+        if(user.isPresent()) {
+            return new ResponseEntity<>(user.get(), HttpStatus.OK);
+        };
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     @GetMapping(path = "/{email}/{password}")
-    public ResponseEntity<String> cheackCredential(@PathVariable(name = "email") String email,@PathVariable(name = "password") String password){
-        if(userService.checkUserAndPassword(email,password)==200){
-            return new ResponseEntity<>("Credenciales correctas", HttpStatus.OK);
-        } else if (userService.checkUserAndPassword(email,password)==555) {
-            return new ResponseEntity<>("Credenciales incorrectas",HttpStatus.UNAUTHORIZED);
+    public ResponseEntity<Long> cheackCredential(@PathVariable(name = "email") String email,@PathVariable(name = "password") String password){
+        if(userService.checkUserAndPassword(email,password)==404L){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else if (userService.checkUserAndPassword(email,password)==555L) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        return new ResponseEntity<>("Usuario no encontrado",HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(userService.checkUserAndPassword(email,password), HttpStatus.OK);
     }
 
 }
