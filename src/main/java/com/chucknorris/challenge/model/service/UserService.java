@@ -23,7 +23,12 @@ public class UserService {
         this.userRepository = userRepository;
         this.encoder = encoder;
     }
-
+    public Optional<User> getUserById(Long id){
+        return userRepository.findById(id);
+    }
+    public Optional<User> getByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
     public List<User> getAll(){
         return userRepository.findAll();
     }

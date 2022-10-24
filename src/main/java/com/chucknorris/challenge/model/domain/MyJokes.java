@@ -22,17 +22,12 @@ public class MyJokes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_joke")
     private Long idJoke;
-
-    @Column(name = "icon_url")
-    private String iconUrl;
-
-    @Column(name = "id")
-    private String idJokeApi;
-
+    private String icon_url;
+    private String id;
     private String url;
-
-    @Column(name = "value")
-    private String joke;
+    private String value;
+    @Column(name = "id_user")
+    private Long userId;
 
     @ManyToOne
     @JsonBackReference

@@ -30,7 +30,15 @@ public class UserController {
     public List<User> getAll(){
         return userService.getAll();
     }
+    @GetMapping(path = "/email/{email}")
+    public ResponseEntity<User> getByEmail(@PathVariable(name = "email")String email){
+        var user=userService.getByEmail(email);
+        if(user.isPresent()) {
+            return new ResponseEntity<>(user.get(), HttpStatus.OK);
+        };
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
+    }
     @GetMapping(path = "/{email}/{password}")
     public ResponseEntity<String> cheackCredential(@PathVariable(name = "email") String email,@PathVariable(name = "password") String password){
         if(userService.checkUserAndPassword(email,password)==200){
