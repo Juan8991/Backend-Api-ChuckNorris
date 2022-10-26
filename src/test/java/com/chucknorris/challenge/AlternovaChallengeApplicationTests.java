@@ -19,12 +19,12 @@ class AlternovaChallengeApplicationTests {
 	void saveUserTest() {
 		//Arrange
 		User newUser= new User();
-		newUser.setEmail("example2@gmail.com");
-		newUser.setPassword(encoder.encode("124567"));
+		newUser.setEmail("ramirezjuan@gmail.com");
+		newUser.setPassword(encoder.encode("123"));
 		//Act
 		User userDatabase=repository.save(newUser);
 		//Assert
-		Assertions.assertEquals("example2@gmail.com",userDatabase.getEmail());
+		Assertions.assertEquals("ramirezjuan@gmail.com",userDatabase.getEmail());
 
 	}
 
